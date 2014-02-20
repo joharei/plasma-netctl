@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Netctl
+Type=Service
+Icon=network-wireless-100
+X-KDE-PluginInfo-Author=Johan Reitan
+X-KDE-PluginInfo-Email=johan.reitan@gmail.com
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=netctl
+X-KDE-PluginInfo-Version=1
+X-KDE-ServiceTypes=Plasma/Applet,Plasma/PopupApplet
+X-Plasma-API=python
+X-Plasma-DefaultSize=200,100
+X-Plasma-MainScript=code/netctl.py
