@@ -51,7 +51,7 @@ class Netctl(QGraphicsWidget):
 
         self.layout = QGraphicsLinearLayout(Qt.Horizontal, self)
         self.label = Plasma.Label(self)
-        self.label.setText('{}\nStrength: {.2f}'.format(str(wpa_status()), get_quality(default_interface())))
+        self.label.setText('{!s}\nStrength: {:.2f} %'.format(wpa_status(), get_quality()))
         self.layout.addItem(self.label)
         self.setLayout(self.layout)
         self.resize(125, 125)
@@ -72,10 +72,10 @@ class Netctl(QGraphicsWidget):
             QTimer.singleShot(5000, self.update_loop)
 
     def update_text(self):
-        self.label.setText('{}\nStrength: {}'.format(str(wpa_status()), get_quality(default_interface())))
+        self.label.setText('{!s}\nStrength: {:.2f} %'.format(wpa_status(), get_quality()))
 
     def update_icon(self):
-        quality = get_quality(default_interface())
+        quality = get_quality()
         print("Quality: {}".format(quality))
         if quality >= 100:
             self.applet.setPopupIcon("network-wireless-100")
@@ -97,11 +97,7 @@ class Netctl(QGraphicsWidget):
             self.applet.setPopupIcon("network-wired")
 
 
-
-def dummy():
-    pass
-
-def get_quality(iface):
+def get_quality():
     stdout = subprocess.check_output(['iwconfig'], stderr=open(os.devnull, 'wb'))
     quality = ''
     for line in stdout.split('\n'):
@@ -111,6 +107,7 @@ def get_quality(iface):
     qmax = int(quality[26:28])
     q = int(quality[23:25])
     return 1. * q / qmax * 100
+
 
 def default_interface():
     """returns the interface of the default route"""
